@@ -1,7 +1,7 @@
 \documentclass[border=12pt, multi, tikz]{standalone}
 %\usepackage{blocks}
 % \usepackage[top=4cm,left=2cm]{geometry}
-\usepackage[fontsize=14pt]{fontsize}
+\usepackage[fontsize=100pt]{fontsize}
 \usepackage{import}
 \subimport{../../layers/}{init}
 %\usepackage{optics}
@@ -24,6 +24,9 @@
 % \def\InputColor{rgb:}
 
 \newcommand{\copymidarrow}{\tikz \draw[-Stealth,line width =1mm,draw={rgb:blue,4;red,1;green,1;black,3}] (-0.3,0) -- ++(0.3,0);}
+
+% To size sizes to log scale.
+% \newcommand*{\convertsize}[1]{multiply(2, div(log10(#1), log10(2)))}
 
 
 \begin{document}
@@ -48,7 +51,7 @@
     \pic[shift={(0,0,0)}] at (0,0,0) {
         Box={
                 name=input,
-                caption=input,
+                caption=\\[0.03cm] input,
                 xlabel= 1,
                 ylabel=258,
                 zlabel=\qquad 258,
@@ -62,7 +65,7 @@
     \pic[shift={(1,0,0)}] at (0,0,0) {
         Box={
                 name= conv1,
-                caption=conv 3x3,
+                caption=\\[1.5cm] conv 3x3,
                 xlabel={{"64",""}},
                 ylabel=,%258,
                 zlabel=258,
@@ -90,7 +93,7 @@
     \pic[shift={(0,0,0)}] at (mp1-east) {
         Box={
                 name=mp2,
-                caption=\\[1cm] maxpool,
+                caption=\\[1em] maxpool,
                 xlabel={{"64",""}},
                 ylabel=,%64,
                 zlabel=64,
@@ -118,7 +121,7 @@
     \pic[shift={(2,0,0)}] at (mp3-east) {
         Box={
                 name= conv2,
-                caption=conv 5x5,
+                caption=\\[1em] conv 5x5,
                 xlabel={{"64",""}},
                 ylabel=,%32,
                 zlabel=32,
@@ -149,7 +152,7 @@
     \pic[shift={(2,0,0)}] at (mp4-east) {
         Box={
                 name= conv3,
-                caption=conv 3x3,
+                caption=\\[1em] conv 3x3,
                 xlabel={{"64",""}},
                 ylabel=,%14,
                 zlabel=14,
@@ -181,7 +184,7 @@
     \pic[shift={(2,0,0)}] at (mp5-east) {
         Box={
                 name= conv4,
-                caption=conv 6x6,
+                caption=\\[2em] conv 6x6,
                 xlabel={{"64",""}},
                 ylabel=,%6,
                 zlabel=6,
@@ -226,7 +229,7 @@
     \pic[shift={(2,0,0)}] at (fc2-east) {
         Box={
                 name=fc3,
-                caption=,%,
+                caption=\\[1cm] fc,%,
                 xlabel={{1, }},
                 zlabel=3,
                 fill=\FcColor,
@@ -243,11 +246,11 @@
     \draw [connection] (fc3-east) -- node {\midarrow} (output);
 
     % LEGEND
-    \matrix [draw,below left] at (current bounding box.south east) {
-        \node [convbnrelu,label=right:CONV + BN + ReLU] {}; \\
-        \node [mp,label=right:MP 2x2] {};                   \\
-        \node [fcbnrelu,label=right:FC + BN + ReLU] {};     \\
-        \node [fc,label=right:FC] {};                       \\
+    \matrix [draw,below left] at (40, -7, 0) {
+    \node [convbnrelu,label=right:{\Huge CONV + BN + ReLU}] {}; \\
+    \node [mp,label=right:{\Huge MP 2x2}] {};                   \\
+    \node [fcbnrelu,label=right:{\Huge FC + BN + ReLU}] {};     \\
+    \node [fc,label=right:{\Huge FC}] {};                       \\
     };
 \end{tikzpicture}
 \end{document}
